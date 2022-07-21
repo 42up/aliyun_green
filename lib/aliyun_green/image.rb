@@ -2,9 +2,27 @@ module AliyunGreen
   module Image
     class << self
       def scan(tasks, **options)
-        response = AliyunGreen.client.post("/green/text/scan", build_payload(tasks))
-
+        check_tasks(tasks)
+        response = AliyunGreen.client.post("/green/image/asyncscan", build_payload(tasks, options))
         response
+      end
+
+      def scan_async(tasks, **options)
+        check_tasks(tasks)
+        callback_url = options[:callback_url]
+        payload = build_payload(tasks, options)
+        if callback_url
+          payload[:callback] = callback_url
+          payload[:seed] = SecureRandom.uuid
+        end
+        answer = AliyunGreen.client.post("/green/image/asyncscan", payload)
+        answer["seed"] = payload[:seed] if callback_url
+
+        answer
+      end
+
+      def check_task_answer(task_ids)
+        response = AliyunGreen.client.post("/green/image/results", task_ids)
       end
 
       def feedback
@@ -84,18 +102,25 @@ module AliyunGreen
 
       private
 
+      def check_tasks(tasks)
+        raise ArgumentError, "tasks must be an Array" unless tasks.is_a?(Array)
+        raise ArgumentError, "tasks size must no more than 100" unless tasks.size <= 100
+        raise ArgumentError, "tasks must be an Array of Hash with necessary key url" unless tasks.all? { |task| task.is_a?(Hash) || task.keys.include?(:url) }
+      end
+
       def calc_valid_scenes(options)
-        scenes = options[:secnes] || options["secnes"]
+        scenes = options[:secnes] || options["secnes"] || []
 
         valid_scenes = scenes.select { |x| scene_dict.keys.map(&:to_s).include? x.to_s }
         valid_scenes = ["porn", "terrorism"] if valid_scenes.size == 0
       end
 
       # 需要先在内容安全/设置/机器审核/业务场景: default 中进行初始配置是
-      def build_payload(tasks)
+      def build_payload(tasks, options)
+        scenes = calc_valid_scenes(options)
         payload = {
           bizType: "default",
-          scenes: ["antispam"],
+          scenes: scenes,
           tasks: tasks,
         }
         payload
