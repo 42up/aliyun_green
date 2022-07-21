@@ -1,8 +1,8 @@
 # AliyunGreen
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aliyun_green`. To experiment with that code, run `bin/console` for an interactive prompt.
+基于 阿里云的 内容审核
 
-TODO: Delete this and the text above, and describe your gem
+具体参见 [阿里云内容审核](https://help.aliyun.com/document_detail/84456.html?spm=a2c4g.11186623.0.0.7662754aWakeeW)
 
 ## Installation
 

@@ -16,12 +16,8 @@ module AliyunGreen
       self.enable_internal   = config[:enable_internal]
     end
 
-    def post(uri , tasks, params = {})
-      payload = {
-        bizType: 'default',
-        scenes: ["antispam"],
-        tasks: tasks
-      }
+    def post(uri , payload, params = {})
+     
 
       url = "https://#{get_host(self.endpoint)}#{uri}"
 
