@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+具体可参见 spec/aliyun_green_spec.rb 的测试用例
 
 ## Development
 
