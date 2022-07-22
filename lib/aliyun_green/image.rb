@@ -3,7 +3,7 @@ module AliyunGreen
     class << self
       def scan(tasks, **options)
         check_tasks(tasks)
-        response = AliyunGreen.client.post("/green/image/asyncscan", build_payload(tasks, options))
+        response = AliyunGreen.client.post("/green/image/scan", build_payload(tasks, options))
         response
       end
 

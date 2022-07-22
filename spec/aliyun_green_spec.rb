@@ -34,6 +34,7 @@ RSpec.describe AliyunGreen do
       ]
 
       response = AliyunGreen::Image.scan(tasks)
+      puts response
       # {"code"=>200, "data"=>[{"code"=>200, "extras"=>{}, "msg"=>"OK", "results"=>[{"label"=>"normal", "rate"=>99.9, "scene"=>"porn", "suggestion"=>"pass"}, {"label"=>"normal", "rate"=>100.0, "scene"=>"terrorism", "suggestion"=>"pass"}], "taskId"=>"img4ubk19AOA2s7saK5dZROfM-1wy2$k", "url"=>"https://www.betaqr.com/images/wallpapers/rebirth.jpg"}], "msg"=>"OK", "requestId"=>"9A2524EC-C9DC-59F2-9B0A-C2B8BEA4D5F1"}
 
       # {"code"=>200, "data"=>[{"code"=>200, "extras"=>{}, "msg"=>"OK", "results"=>[{"label"=>"porn", "rate"=>95.92, "scene"=>"porn", "suggestion"=>"review"}, {"label"=>"normal", "rate"=>100.0, "scene"=>"terrorism", "suggestion"=>"pass"}], "taskId"=>"img74JOskCik585d8$1ncDPdF-1wy3di", "url"=>"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsc01.alicdn.com%2Fkf%2FHTB1ldIMbdfvK1RjSspfq6zzXFXap%2F235262355%2FHTB1ldIMbdfvK1RjSspfq6zzXFXap.jpg&refer=http%3A%2F%2Fsc01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1660999559&t=977c7868c88f6e6ba6f29f5dfe60c512"}], "msg"=>"OK", "requestId"=>"D141D88C-96C0-5CA0-ACD1-6B2D22A7E83F"}
