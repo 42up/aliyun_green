@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require_relative "aliyun_green/version"
 require_relative "aliyun_green/text"
+require_relative "aliyun_green/image"
 require_relative "aliyun_green/error"
 require_relative "aliyun_green/client"
 require_relative "aliyun_green/configuration"
