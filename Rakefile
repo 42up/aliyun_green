@@ -10,3 +10,7 @@ require "rubocop/rake_task"
 RuboCop::RakeTask.new
 
 task default: %i[spec rubocop]
+
+task :console do
+  exec "pry	-r aliyun_green -I ./lib"
+end
