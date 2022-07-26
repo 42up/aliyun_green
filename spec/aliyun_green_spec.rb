@@ -22,6 +22,10 @@ RSpec.describe AliyunGreen do
       response = AliyunGreen::Text.scan("Hello, world!")
       # {"code"=>200, "data"=>[{"code"=>200, "content"=>"Hello, world!", "msg"=>"OK", "results"=>[{"label"=>"normal", "rate"=>99.91, "scene"=>"antispam", "suggestion"=>"pass"}], "taskId"=>"txt68HT9XiCXSB5Z9J6Gzswj1-1wxZXX"}], "msg"=>"OK", "requestId"=>"E9D11DA9-90B9-5A4F-9EFB-694EF42D8032"}
       expect(response.dig("code")).to eq(200)
+
+      response = AliyunGreen::Text.scan("日你妈，退钱")
+      puts response
+      expect(response.dig("code")).to eq(200)
     end
   end
 
@@ -39,6 +43,52 @@ RSpec.describe AliyunGreen do
 
       # {"code"=>200, "data"=>[{"code"=>200, "extras"=>{}, "msg"=>"OK", "results"=>[{"label"=>"porn", "rate"=>95.92, "scene"=>"porn", "suggestion"=>"review"}, {"label"=>"normal", "rate"=>100.0, "scene"=>"terrorism", "suggestion"=>"pass"}], "taskId"=>"img74JOskCik585d8$1ncDPdF-1wy3di", "url"=>"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsc01.alicdn.com%2Fkf%2FHTB1ldIMbdfvK1RjSspfq6zzXFXap%2F235262355%2FHTB1ldIMbdfvK1RjSspfq6zzXFXap.jpg&refer=http%3A%2F%2Fsc01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1660999559&t=977c7868c88f6e6ba6f29f5dfe60c512"}], "msg"=>"OK", "requestId"=>"D141D88C-96C0-5CA0-ACD1-6B2D22A7E83F"}
 
+      expect(response.dig("code")).to eq(200)
+    end
+
+    it "invokes images scan correctly" do
+      tasks = [
+        {
+          url: "https://www.betaqr.com/images/wallpapers/rebirth.jpg",
+        }, {
+          url: "https://www.betaqr.com/images/wallpapers/rebirth.jpg",
+        },
+      ]
+      response = AliyunGreen::Image.scan(tasks)
+      puts response
+
+      # {"code"=>200,
+      #   "data"=>
+      #    [{"code"=>200,
+      #      "extras"=>{},
+      #      "msg"=>"OK",
+      #      "results"=>
+      #       [{"label"=>"normal",
+      #         "rate"=>99.9,
+      #         "scene"=>"porn",
+      #         "suggestion"=>"pass"},
+      #        {"label"=>"normal",
+      #         "rate"=>100.0,
+      #         "scene"=>"terrorism",
+      #         "suggestion"=>"pass"}],
+      #      "taskId"=>"img1mo$qAp8H$15VIzCwFdeh@-1wyA$E",
+      #      "url"=>"https://www.betaqr.com/images/wallpapers/rebirth.jpg"},
+      #     {"code"=>200,
+      #      "extras"=>{},
+      #      "msg"=>"OK",
+      #      "results"=>
+      #       [{"label"=>"normal",
+      #         "rate"=>99.9,
+      #         "scene"=>"porn",
+      #         "suggestion"=>"pass"},
+      #        {"label"=>"normal",
+      #         "rate"=>100.0,
+      #         "scene"=>"terrorism",
+      #         "suggestion"=>"pass"}],
+      #      "taskId"=>"imgWnzKr9uQH04hLfFpCQyaJ-1wyA$E",
+      #      "url"=>"https://www.betaqr.com/images/wallpapers/rebirth.jpg"}],
+      #   "msg"=>"OK",
+      #   "requestId"=>"4B549041-BC42-53CD-B35D-A51424A9F130"}
       expect(response.dig("code")).to eq(200)
     end
 
